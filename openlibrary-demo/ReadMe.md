@@ -23,7 +23,7 @@ Java-Api-Automation/
 - Java 17 or higher  
 - Maven 3.x  
 - Git  
-- Optional: VS code / IntelliJ IDEA / Eclipse IDE
+- IDE : VS code / IntelliJ IDEA / Eclipse IDE
 
 ---
 
