@@ -1,8 +1,14 @@
 HELP.md
 target/
+allure-results/
+allure-report/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+# Ignore Allure binaries
+.allure/
+
+
 
 ### STS ###
 .apt_generated
