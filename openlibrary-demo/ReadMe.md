@@ -52,3 +52,7 @@ Workflow triggers on:
 on:
   pull_request:
     branches: [ main ]
+
+on:
+   push:
+    branches: [ main ]
