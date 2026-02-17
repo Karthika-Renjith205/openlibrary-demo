@@ -6,50 +6,48 @@ on:
   push:
     branches: [ main ]
 
+permissions:
+  contents: write   
+
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
 
-    - name: Set up Java
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'temurin'
-        java-version: '17'
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: maven-${{ runner.os }}
 
-    - name: Cache Maven dependencies
-      uses: actions/cache@v4
-      with:
-        path: ~/.m2
-        key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
-        restore-keys: |
-          maven-${{ runner.os }}
+      - name: Run Tests
+        run: mvn clean test
 
-    - name: Run Tests
-      run: mvn clean test
+      #  Generate Allure HTML
+      - name: Generate Allure Report
+        run: mvn allure:report
 
-
-      #  Generate Allure HTML report
-      name: Generate Allure Report
-      run: mvn allure:report
-
-      # Upload HTML 
-      -name: Upload Allure HTML
-      uses: actions/upload-artifact@v4
-      with: 
+      #  Upload HTML
+      - name: Upload Allure HTML
+        uses: actions/upload-artifact@v4
+        with:
           name: allure-report
           path: target/site/allure-maven-plugin
 
-      # Publish report 
-      -name: Deploy Allure to GitHub Pages
-      if: github.ref == 'refs/heads/main'
-      uses: peaceiris/actions-gh-pages@v4
-      with:
+      #  Deploy to GitHub Pages (ONLY after merge)
+      - name: Deploy Allure to GitHub Pages
+        if: github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: target/site/allure-maven-plugin
-
-    
