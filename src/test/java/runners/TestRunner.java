@@ -6,9 +6,11 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/features", glue = { "stepdefinitions" }, plugin = {
-        "pretty",
-        "html:target/cucumber-report.html",
-        "json:target/cucumber.json"
+                "pretty",
+                "html:target/cucumber-report.html",
+                "json:target/cucumber.json",
+                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
+
 })
 public class TestRunner {
 }
