@@ -1,2 +1,2 @@
 "Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Wed Feb 18 05:15:07 UTC 2026","Wed Feb 18 05:15:09 UTC 2026","2052","","OpenLibrary API","","Get Author info","","Get Author info",""
+"passed","Wed Feb 18 09:40:35 UTC 2026","Wed Feb 18 09:40:44 UTC 2026","9384","","OpenLibrary API","","Get Author info","","Get Author info",""
